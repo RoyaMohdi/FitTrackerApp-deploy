@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .row.justify-content-center
+      .col-lg-4.col-md-6 
+        .mt-5
+          h1.text-center.mb-4 Login 
+        div#login-form.mt-4
+          form(method='POST', action='/users/login')
+            .mb-3  
+              label(for='inputEmail3') Email
+              input.form-control.mt-2(type='email', id='inputEmail3', name='email')
+
+            .mb-3
+              label(for='inputPassword3') Password
+              input.form-control.mt-2(type='password', id='inputPassword3', name='password')
+
+            if errors
+              .alert.alert-danger
+                each error in errors
+                  p #{error.msg}
+
+            .text-center
+              button.btn.btn-primary(type='submit') Login
+

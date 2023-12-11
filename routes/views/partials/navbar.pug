@@ -1,0 +1,23 @@
+nav.navbar.navbar-expand-lg.bg-body-tertiary
+  .container-fluid
+    a.navbar-brand(href='/') Fit Tracker App
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        if user
+          li.nav-item
+            a.nav-link(href="/activities/home") Activities
+          li.nav-item
+            a.nav-link(href="/activities/add") Add activity
+          li.nav-item
+            a.nav-link(href="/calendar") Calendar
+          li.nav-item
+            a.nav-link(href="/profile") Profile
+          li.nav-item
+            a.nav-link(href="/users/logout") Logout
+        else
+          li.nav-item
+            a.nav-link(href="/users/register") Register
+          li.nav-item
+            a.nav-link(href="/users/login") Login
