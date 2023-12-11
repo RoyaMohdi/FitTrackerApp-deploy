@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container
+    h1.text-center.mt-5 #{activity.charAt(0).toUpperCase() + activity.slice(1)} Videos
+    .row.mt-5
+      each video in videos
+        .col-md-4.mb-4 
+          .card.h-100
+            .card-body
+              h5.card-title.text-center #{video.title}
+              .embed-responsive.embed-responsive-16by9
+                iframe.embed-responsive-item(src=video.url, frameborder='0', allowfullscreen style='margin: auto; display: block;') 
+
+
+
