@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-8.offset-md-2
+        h1.text-center.mt-5 Profile
+        if profile
+          .card
+            .card-body
+              p.card-title.mb-3 
+                strong User: 
+                | #{user.name}
+              p.card-text 
+                strong Age: 
+                | #{profile.age}
+              p.card-text 
+                strong Date of Birth: 
+                | #{profile.birth}
+              p.card-text 
+                strong Weight: 
+                span#weight #{profile.weight}
+              p.card-text 
+                strong Height: 
+                span#height #{profile.height}
+              p.card-text 
+                strong Goals: 
+                | #{profile.goals}
+              .text-center.mt-4
+                button.btn.btn-primary(onclick="calculateBMI()") Calculate BMI
+              p.card-text 
+                p#bmiResult
+                   
+                
+        else
+          p No profile found.
+
+        .text-center.mt-4
+          a.btn.btn-primary(href="/profile/update") Update profile
+  script.
+      function calculateBMI() {
+        var weight = parseFloat(document.getElementById('weight').textContent);
+        var height = parseFloat(document.getElementById('height').textContent);
+        if (weight > 0 && height > 0) {
+          var bmi = weight / (height * height);
+          var bmiResult = 'Your BMI is ' + bmi.toFixed(2) + '\n\n';
+          if (bmi < 18.5) {
+            bmiResult += 'Your BMI suggests that you are underweight. It\'s important to eat a balanced diet and maintain a healthy lifestyle. Consider consulting a healthcare professional for guidance.\n\n';
+          } else if (bmi >= 18.5 && bmi <= 24.9) {
+            bmiResult += 'Your BMI is in the normal range, which is great! Keep up with your healthy habits to maintain this balance.\n';
+          } else if (bmi >= 25 && bmi <= 29.9) {
+            bmiResult += 'Your BMI indicates that you are slightly overweight. Consider reviewing your diet and exercise routine to find a healthier balance.\n';
+          } else {
+            bmiResult += 'Your BMI falls into the obesity range. Focusing on a healthier lifestyle through diet and exercise is important, and it might be beneficial to seek advice from a healthcare professional.\n';
+          }
+          bmiResult += 'For a complete health assessment, it is advisable to consult a healthcare professional.';
+          document.getElementById('bmiResult').innerHTML = bmiResult.replace(/\n/g, "<br>");
+        } else {
+          document.getElementById('bmiResult').innerHTML = 'Invalid weight or height';
+        }
+      }
+
+
+

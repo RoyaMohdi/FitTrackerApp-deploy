@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .container.mt-5
+    h1.text-center= title
+    .row.mt-5
+      .col-md-3
+        input(type='date', id='datePicker', class='form-control')
+      .col
+        button(onclick='filterActivitiesByDate()', class='btn btn-primary btn-block') Search
+        button(onclick= 'resetFilter()', class='btn btn-secondary btn-block') Reset
+
+    br
+    br
+
+    #activities
+      each activity in activities
+        .activities-list.card.mb-3
+          .card
+            .card-body
+              h5.card-title Date:
+              p.card-text= activity.date
+              h5.card-title Type:
+              p.card-text= activity.type
+              h5.card-title Duration:
+              p.card-text= activity.duration
+              h5.card-title Calorie Loss:
+              p.card-text= activity.calorieLoss
+
+  script.
+    function filterActivitiesByDate() {
+      const selectedDate = document.getElementById('datePicker').value;
+      const activities = document.querySelectorAll('.card'); 
+      activities.forEach(activity => {
+        const activityDateString = activity.querySelector('.card-text:nth-child(2)').textContent;
+        if (selectedDate === activityDateString) {
+          activity.style.display = 'block';
+        } else {
+          activity.style.display = 'none';
+        }
+      });
+    }
+    function resetFilter(){
+      const activities = document.querySelectorAll('.card'); 
+      activities.forEach(activity => {
+        activity.style.display = 'block';
+      });
+    }

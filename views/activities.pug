@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container
+    h1.text-center.mt-5= title
+    p.mb-3.text-center Check the videos for the activities below to get started!
+    .row
+      each activityType in types
+        .col-12.mb-2
+          a.btn.btn-light.btn-lg.d-block(href=`/activities/${encodeURIComponent(activityType.toLowerCase())}`) #{activityType}
+
+
+    .mt-4
+      each activity in activities
+        .activities-list.card.mb-3
+          .card-body
+            h5.card-title Type: #{activity.type}
+            p.card-text
+              strong Duration: 
+              span= activity.duration
+            p.card-text
+              strong Calorie Loss: 
+              span= activity.calorieLoss
+            p.card-text
+              strong Date: 
+              span= activity.date
+            .btn-group
+              a.btn.btn-primary.btn-sm(href="/activities/edit/"+ activity._id) Edit
+              a.btn.btn-danger.btn-sm(href="/activities/delete/" + activity._id) Delete

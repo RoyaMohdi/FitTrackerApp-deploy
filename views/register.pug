@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .row.justify-content-center
+      .col-lg-4.col-md-6  
+        .mt-5
+          if errors
+            each error in errors
+              .alert.alert-danger(role='alert') #{error.msg}
+          h1.text-center.mb-4 Register User
+          form(method='POST', action='/users/register')
+            .form-group.mb-3
+              label(for='inputName') Name
+              input#inputName.form-control.mt-2(name='name', type='text', required)
+            
+            .form-group.mb-3
+              label(for='inputEmail') Email
+              input#inputEmail.form-control.mt-2(name='email', type='email', required)
+            
+            .form-group.mb-3
+              label(for='inputPassword') Password
+              input#inputPassword.form-control.mt-2(name='password', type='password', required)
+            
+            .text-center
+              button.btn.btn-primary(type='submit') Register
